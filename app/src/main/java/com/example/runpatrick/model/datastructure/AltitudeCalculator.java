@@ -4,7 +4,7 @@ import android.location.Location;
 
 import java.util.List;
 
-public class AltitudeCalculator {
+class AltitudeCalculator {
     public int calculatePosAltitude(List<Location> locationList) {
         if (locationList.size() < 2) {
             return 0;
@@ -20,7 +20,7 @@ public class AltitudeCalculator {
         return positiveAltitude;
     }
 
-    public int calculateNegAltitude(List<Location> locationList) {
+    int calculateNegAltitude(List<Location> locationList) {
         if (locationList.size() < 2) {
             return 0;
         }

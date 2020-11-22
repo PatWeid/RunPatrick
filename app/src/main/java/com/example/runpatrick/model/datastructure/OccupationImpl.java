@@ -16,7 +16,7 @@ class OccupationImpl implements Occupation{
 
 
 
-    public OccupationImpl(List<Location> locationList, Date startDate, Date endDate) {
+    OccupationImpl(List<Location> locationList, Date startDate, Date endDate) {
         this.locationList = locationList;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -53,7 +53,7 @@ class OccupationImpl implements Occupation{
 
     @Override
     public double getDistanceInKilometers() {
-        return this.distanceCalculator.calculateDistance(this.locationList);
+        return (this.distanceCalculator.calculateDistanceInMeters(this.locationList))/1000;
     }
 
     @Override

@@ -8,7 +8,7 @@ import com.example.runpatrick.model.datastructure.OccupationFactory;
 import java.util.Date;
 import java.util.List;
 
-class OccupationMakerImpl implements OccupationMaker{
+public class OccupationMakerImpl implements OccupationMaker{
     private Date startDate;
 
     @Override

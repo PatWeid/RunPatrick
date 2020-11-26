@@ -16,6 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RunPatrick"
         tools:replace="android:allowBackup">
+        <activity android:name=".view.showOccupation.ShowOccupationActivity"
+            android:parentActivityName=".view.showHistory.ShowHistoryActivity"></activity>
+        <activity
+            android:name=".view.showHistory.ShowHistoryActivity"
+            android:parentActivityName=".view.tracking.TrackingActivity" />
+
+        <service
+            android:name=".view.tracking.GPSTrackerService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity android:name=".view.tracking.TrackingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

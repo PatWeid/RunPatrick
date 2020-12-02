@@ -15,8 +15,8 @@ public abstract class OccupationPojoDatabase extends RoomDatabase {
 
     public abstract OccupationPojoDao occupationPojoDao();
 
-    public static synchronized OccupationPojoDatabase getInstance(Context context){
-        if(instance == null){
+    public static synchronized OccupationPojoDatabase getInstance(Context context) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     OccupationPojoDatabase.class, "occupation_database")
                     .fallbackToDestructiveMigration()
@@ -26,12 +26,11 @@ public abstract class OccupationPojoDatabase extends RoomDatabase {
         return instance;
     }
 
-    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
+    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
-            //"autofill" aufrufen:
             new PopulateDbAsyncTask(instance).execute();
         }
     };
@@ -39,8 +38,7 @@ public abstract class OccupationPojoDatabase extends RoomDatabase {
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private OccupationPojoDao occu;
 
-        //das geht weil onCreate() aufgerufen wird, nachdem die DB erzeugt wurde:
-        private PopulateDbAsyncTask(OccupationPojoDatabase db){
+        private PopulateDbAsyncTask(OccupationPojoDatabase db) {
             occu = db.occupationPojoDao();
         }
 

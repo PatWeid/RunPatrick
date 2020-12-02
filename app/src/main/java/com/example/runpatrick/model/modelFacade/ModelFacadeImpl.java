@@ -29,8 +29,6 @@ public class ModelFacadeImpl implements  ModelFacade{
         this.occupationMaker = occupationMaker;
         this.repository = repository;
     }
-    //state machine
-
 
     public void setOccupationMaker(OccupationMaker occupationMaker) {
         this.occupationMaker = occupationMaker;
@@ -45,21 +43,20 @@ public class ModelFacadeImpl implements  ModelFacade{
     }
 
     @Override
-    public void stopTracking(List<Location> locationList) {
+    public void startTracking(){
+        this.occupationMaker.startTracking();
+    }
+
+    @Override
+    public void stopTracking(List<Location> locationList){
         Occupation trackedOccupation = this.occupationMaker.stopTracking(locationList);
         OccupationPojo trackedOccupationPojo = PojoConverter.convertToPojo(trackedOccupation);
         this.repository.insert(trackedOccupationPojo);
     }
 
     @Override
-    public void startTracking() {
-        this.occupationMaker.startTracking();
-
-    }
-
-    @Override
     public void update(List<Location> locationList) {
-        distance = this.distanceCalculator.calculateDistanceInMeters(locationList);
+        this.distance = this.distanceCalculator.calculateDistanceInMeters(locationList);
 
     }
 
@@ -71,7 +68,7 @@ public class ModelFacadeImpl implements  ModelFacade{
     @Override
     public Long getOccupationTime() {
        //todo
-        return 0L;
+        return occupationTime;
     }
 
     @Override

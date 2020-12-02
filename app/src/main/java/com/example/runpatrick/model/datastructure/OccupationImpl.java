@@ -5,7 +5,7 @@ import android.location.Location;
 import java.util.Date;
 import java.util.List;
 
-class OccupationImpl implements Occupation{
+class OccupationImpl implements Occupation {
     private final List<Location> locationList;
     private final Date startDate;
     private final Date endDate;
@@ -13,7 +13,6 @@ class OccupationImpl implements Occupation{
     private final AltitudeCalculator altitudeCalculator;
     private final DistanceCalculator distanceCalculator;
     private final SpeedCalculator speedCalculator;
-
 
 
     OccupationImpl(List<Location> locationList, Date startDate, Date endDate) {
@@ -53,12 +52,12 @@ class OccupationImpl implements Occupation{
 
     @Override
     public double getDistanceInKilometers() {
-        return (this.distanceCalculator.calculateDistanceInMeters(this.locationList))/1000;
+        return (this.distanceCalculator.calculateDistanceInMeters(this.locationList)) / 1000;
     }
 
     @Override
     public long getOccupationTimeInSeconds() {
-        return ((getEndDate().getTime()) - (getStartDate().getTime()))/1000;
+        return ((getEndDate().getTime()) - (getStartDate().getTime())) / 1000;
     }
 
     @Override

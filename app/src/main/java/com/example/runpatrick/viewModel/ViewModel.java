@@ -27,7 +27,7 @@ public interface ViewModel {
 
     /**
      * returns the occupation at the given index
-     *
+     * not implemented yet
      * @param index
      * @return occupation at the given index
      * @params index: occupation's index - counting starts at zero

@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class RepositoryImpl implements Repository{
-    private OccupationPojoDao occupationPojoDao;
-    private LiveData<List<OccupationPojo>> allOccupations;
+    private final OccupationPojoDao occupationPojoDao;
+    private final LiveData<List<OccupationPojo>> allOccupations;
 
     public RepositoryImpl(Application application) {
         OccupationPojoDatabase occupationDatabase = OccupationPojoDatabase.getInstance(application);
@@ -17,11 +17,6 @@ public class RepositoryImpl implements Repository{
         this.allOccupations = occupationPojoDao.getAllOccupations();
     }
 
-    //insert, update, delete und deleteAll sind DB Operationen
-    //-> dürfen nicht im Main Thread ausgeführt werden
-    //-> Asynctask
-    //die folgenden Methoden sind diejenigen, die das Repository nach außen gibt und somit die DB abstrahiert
-    //-> AbstractionLayer
     public void insert(OccupationPojo occupation){
         new InsertOccupationAsyncTask(occupationPojoDao).execute(occupation);
     }
@@ -37,7 +32,7 @@ public class RepositoryImpl implements Repository{
 
 
     private static class InsertOccupationAsyncTask extends AsyncTask<OccupationPojo, Void, Void> {
-        private OccupationPojoDao occupationPojoDao;
+        private final OccupationPojoDao occupationPojoDao;
 
         private InsertOccupationAsyncTask(OccupationPojoDao occupationPojoDao){
             this.occupationPojoDao = occupationPojoDao;
@@ -52,7 +47,7 @@ public class RepositoryImpl implements Repository{
     }
 
     private static class DeleteOccupationAsyncTask extends AsyncTask<OccupationPojo, Void, Void> {
-        private OccupationPojoDao occupationPojoDao;
+        private final OccupationPojoDao occupationPojoDao;
 
         private DeleteOccupationAsyncTask(OccupationPojoDao occupationPojoDao){
             this.occupationPojoDao = occupationPojoDao;

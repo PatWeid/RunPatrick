@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey;
 public class OccupationPojo {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String longitudeString;
-    private String latitudeString;
-    private String altitudeString;
-    private long startTime;
-    private long endTime;
+    private final String longitudeString;
+    private final String latitudeString;
+    private final String altitudeString;
+    private final long startTime;
+    private final long endTime;
 
     public OccupationPojo(String longitudeString, String latitudeString, String altitudeString, long startTime, long endTime) {
         this.longitudeString = longitudeString;

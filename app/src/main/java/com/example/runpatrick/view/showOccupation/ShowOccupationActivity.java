@@ -61,11 +61,8 @@ public class ShowOccupationActivity extends AppCompatActivity {
         tvSpeed.setText(occupation.getSpeed()[0] + " : " + occupation.getSpeed()[1] + " min/km");
         tvAltPos.setText("+ " + String.valueOf(occupation.getPosAltitude()) + " m");
         tvAltNeg.setText("- " + String.valueOf(occupation.getNegAltitude()) + " m");
-//        tvAltPos.setText("+ " + String.format("%.2f", occupation.getPosAltitude()) + " m");
-//        tvAltNeg.setText("- " + String.format("%.2f", occupation.getNegAltitude()) + " m");
 
         createMap(map, occupation.getLocationList());
-
     }
 
     private void createMap(MapView map, List<Location> locationList) {

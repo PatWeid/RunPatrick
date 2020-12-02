@@ -40,9 +40,6 @@ public class PojoConverter {
 
         List<Location> locationList = new ArrayList<>();
 
-        System.out.println("longitudearraylength: " + longitudeArray.length);
-
-        try{
         if(arrayLengthAreOK(longitudeArray, latitudeArray, altitudeArray)){
             for(int i =0; i<longitudeArray.length;i++){
                 Location currentLocation = new Location("");
@@ -51,11 +48,6 @@ public class PojoConverter {
                 currentLocation.setAltitude(Double.parseDouble(altitudeArray[i]));
                 locationList.add(currentLocation);
             }
-        }}catch (NumberFormatException e){
-            //todo
-            ///////////////////////////////////wieso fliegt die einmal/////////////////////////////////
-            e.printStackTrace();
-            return new ArrayList<>();
         }
         return locationList;
     }

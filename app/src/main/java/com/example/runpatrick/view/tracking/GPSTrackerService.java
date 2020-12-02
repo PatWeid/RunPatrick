@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +24,8 @@ import java.util.List;
 
 public class GPSTrackerService extends Service implements LocationListener {
 
-    //in constants:
-    private static final float MIN_DISTANCE_BETWEENUPDATES = 1.0f;
-    private static final long MIN_TIME_BETWEENUPDATES = 1000;
+    private static final float MIN_DISTANCE_BETWEENUPDATES = 0.5f;
+    private static final long MIN_TIME_BETWEENUPDATES = 5;
     private final float MIN_ACCURACY = 25.0f;
 
     //durch fusedLocationProviderClient ersetzen
@@ -44,6 +44,7 @@ public class GPSTrackerService extends Service implements LocationListener {
         locationList.clear();
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEENUPDATES, MIN_DISTANCE_BETWEENUPDATES, this);
+//        locationManager.requestLocationUpdates("locationtestprovider", MIN_TIME_BETWEENUPDATES, MIN_DISTANCE_BETWEENUPDATES, this);
     }
 
     @SuppressLint("MissingPermission")
@@ -67,6 +68,7 @@ public class GPSTrackerService extends Service implements LocationListener {
             if (updateHandler != null) {
                 updateHandler.sendEmptyMessage(1);
             }
+            Log.d("GPSTrackerservice", "Location changed");
         }
     }
 

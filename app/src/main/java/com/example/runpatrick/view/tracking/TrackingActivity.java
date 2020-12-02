@@ -3,9 +3,11 @@ package com.example.runpatrick.view.tracking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,7 +57,6 @@ public class TrackingActivity extends AppCompatActivity {
         Context ctx = getApplicationContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
@@ -74,19 +75,21 @@ public class TrackingActivity extends AppCompatActivity {
 
         //check GPS
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if(locationManager == null){
-            throw new RuntimeException("Android is broken");
-        }
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Toast.makeText(this, "Activate GPS", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
         }
 
-        //listeners on buttons
-        final Button btStart = (Button)findViewById(R.id.btStart);
+        //listener auf buttons
+        final Button btStart = (Button) findViewById(R.id.btStart);
+        final Button btStop = (Button) findViewById(R.id.btStop);
+        Button btHistory = (Button) findViewById(R.id.btHistory);
+        btStop.setEnabled(false);
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btStop.setEnabled(true);
+                btStart.setEnabled(false);
                 viewModel.startTracking();
                 Toast.makeText(TrackingActivity.this, "Tracking starts", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
@@ -94,10 +97,11 @@ public class TrackingActivity extends AppCompatActivity {
             }
         });
 
-        final Button btStop = (Button)findViewById(R.id.btStop);
         btStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btStart.setEnabled(true);
+                btStop.setEnabled(false);
                 viewModel.stopTracking(GPSTrackerService.getLocationList());
                 Toast.makeText(TrackingActivity.this, "Tracking stopped", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
@@ -105,7 +109,7 @@ public class TrackingActivity extends AppCompatActivity {
             }
         });
 
-        Button btHistory = (Button) findViewById(R.id.btHistory);
+
         btHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,16 +120,23 @@ public class TrackingActivity extends AppCompatActivity {
 
         //observe occupationdistance
         TextView tvDistance = (TextView) findViewById(R.id.tvDistance);
-//        viewModel.getOccupationDistance().observe(this, new Observer<Double>() {
-//            @Override
-//            public void onChanged(Double newDistance) {
-//                tvDistance.setText(String.valueOf(newDistance));
-//            }
-//        });
+        viewModel.getOccupationDistance().observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double newDistance) {
+                tvDistance.setText(String.valueOf(newDistance));
+            }
+        });
     }
 
-
-
+//    private boolean isMyServiceRunning(Class<?> serviceClass) {
+//        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+//            if (serviceClass.getName().equals(service.service.getClassName())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 
     @Override

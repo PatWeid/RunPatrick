@@ -23,8 +23,6 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
     @NonNull
     @Override
     public OccupationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //parent ist die viewgroup die wir in den argemumenten bekommen und das ist die recyclerview selbst
-        //durch getcontext bekommt man den kontext aus der main, da dort die recylcer view drin ist
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.occupation_item, parent, false);
         return new OccupationHolder(itemView);
@@ -36,7 +34,6 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
         void onItemClick(Occupation occupation);
     }
 
-    //das onitemclicklistener interface aus diesem projekt nehmen
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.listener = onItemClickListener;
     }
@@ -49,8 +46,6 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
 
         holder.tvNumber.setText(DateConverter.convertToString(currentOccupation.getStartDate()));
         holder.tvDistance.setText(String.format("%.2f", currentOccupation.getDistanceInKilometers())+"km");
-
-        //        holder.tvDistance.setText(String.valueOf(currentOccupation.getDistance()));
     }
 
     @Override
@@ -68,10 +63,9 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
 
 
     class OccupationHolder extends RecyclerView.ViewHolder{
-        private TextView tvNumber;
-        private TextView tvDistance;
+        private final TextView tvNumber;
+        private final TextView tvDistance;
 
-        //initializieren der Variablen im Konstruktor
         public OccupationHolder(@NonNull View itemView) {
             super(itemView);
             tvNumber = itemView.findViewById(R.id.tv_number);

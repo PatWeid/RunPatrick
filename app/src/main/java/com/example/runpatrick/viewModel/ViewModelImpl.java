@@ -65,7 +65,7 @@ public class ViewModelImpl extends AndroidViewModel implements com.example.runpa
     }
 
     @Override
-    public void stopTracking(List<Location> locationList) {
+    public void stopTracking(List<Location> locationList){
         this.model.stopTracking(locationList);
     }
 

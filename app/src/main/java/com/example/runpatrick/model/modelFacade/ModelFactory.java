@@ -10,15 +10,15 @@ import com.example.runpatrick.model.occupationMaker.OccupationMaker;
 import com.example.runpatrick.model.occupationMaker.OccupationMakerImpl;
 
 import java.util.List;
-//todo
 
-//public class ModelFactory {
-//    public static ModelFacade produce(Application application) {
-//        ModelFacadeImpl modelFacade = new ModelFacadeImpl();
-//        modelFacade.setDistanceCalculator(new DistanceCalculator());
-//        modelFacade.setOccupationMaker(new OccupationMakerImpl());
-//        modelFacade.setRepository(new RepositoryImpl(application));
-//
-//        return new ModelFacadeImpl();
-//    }
-//}
+
+public class ModelFactory {
+    public static ModelFacade produce(Application application) {
+        ModelFacadeImpl modelFacade = new ModelFacadeImpl();
+        modelFacade.setDistanceCalculator(new DistanceCalculator());
+        modelFacade.setOccupationMaker(new OccupationMakerImpl());
+        modelFacade.setRepository(new RepositoryImpl(application));
+
+        return modelFacade;
+    }
+}

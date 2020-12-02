@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.example.runpatrick.R;
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.datastructure.Occupation;
-import com.example.runpatrick.model.modelFacade.GeoPointCreator;
-import com.example.runpatrick.model.modelFacade.PojoConverter;
-import com.example.runpatrick.view.showHistory.DateConverter;
+import com.example.runpatrick.util.GeoPointCreator;
+import com.example.runpatrick.util.PojoConverter;
+import com.example.runpatrick.view.mapPrinter.MapPrinter;
+import com.example.runpatrick.view.mapPrinter.MapPrinterImpl;
+import com.example.runpatrick.util.DateConverter;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -31,6 +33,7 @@ public class ShowOccupationActivity extends AppCompatActivity {
     public static final String EXTRA_ENDDATE = "extra_endDate";
 
     private static final double ZOOMLEVEL = 18.0;
+    private MapPrinter mapPrinter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,9 @@ public class ShowOccupationActivity extends AppCompatActivity {
         MapView map = findViewById(R.id.viewMap);
         map.setTileSource(TileSourceFactory.MAPNIK);
 
+        this.mapPrinter = new MapPrinterImpl();
+        mapPrinter.setMap(map);
+
         tvDate.setText(DateConverter.convertToString(occupation.getStartDate()));
         tvDistance.setText(String.format("%.2f", occupation.getDistanceInKilometers()) + " km");
         tvTime.setText(String.valueOf(occupation.getOccupationTimeInSeconds()) + " sek");
@@ -62,7 +68,8 @@ public class ShowOccupationActivity extends AppCompatActivity {
         tvAltPos.setText("+ " + String.valueOf(occupation.getPosAltitude()) + " m");
         tvAltNeg.setText("- " + String.valueOf(occupation.getNegAltitude()) + " m");
 
-        createMap(map, occupation.getLocationList());
+        mapPrinter.update(occupation.getLocationList());
+//        createMap(map, occupation.getLocationList());
     }
 
     private void createMap(MapView map, List<Location> locationList) {

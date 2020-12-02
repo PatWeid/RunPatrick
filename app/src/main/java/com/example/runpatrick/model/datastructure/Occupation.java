@@ -6,15 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * the basic datastructure for a tracked running session. It provides different methods for the view and other components, so that
- * relevant data can be displayed or used for calculation
+ * the basic datastructure for a tracked running session.
+ * It provides different methods for the view and other components,
+ * so that relevant data can be displayed or used for calculation
  */
 public interface Occupation {
 
     /**
      * a method for getting the tracked locations
-     *
-     * @return a list with all locations that were tracked during a running session
+     * @return a list with all locations that were tracked
+     * during a running session
      */
     List<Location> getLocationList();
 

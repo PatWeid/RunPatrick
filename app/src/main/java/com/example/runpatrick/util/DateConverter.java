@@ -1,4 +1,4 @@
-package com.example.runpatrick.view.showHistory;
+package com.example.runpatrick.util;
 
 import java.util.Calendar;
 import java.util.Date;

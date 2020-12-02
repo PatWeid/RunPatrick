@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.runpatrick.R;
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.datastructure.Occupation;
-import com.example.runpatrick.model.modelFacade.PojoConverter;
+import com.example.runpatrick.util.DateConverter;
+import com.example.runpatrick.util.PojoConverter;
 
 import java.util.ArrayList;
 import java.util.List;

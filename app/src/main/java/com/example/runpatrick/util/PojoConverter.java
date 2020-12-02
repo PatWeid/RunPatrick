@@ -1,6 +1,7 @@
-package com.example.runpatrick.model.modelFacade;
+package com.example.runpatrick.util;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.datastructure.Occupation;
@@ -14,15 +15,22 @@ public class PojoConverter {
     private static final String DELIMITER = "|";
 
 
-    public static OccupationPojo convertToPojo(Occupation trackedOccupation) {
-        String longitudeString = createLongitudeString(trackedOccupation);
-        String latitudeString = createLatitudeString(trackedOccupation);
-        String altitudeString = createAltitudeString(trackedOccupation);
-        long startTime = trackedOccupation.getStartDate().getTime();
-        long endTime = trackedOccupation.getEndDate().getTime();
+    public static OccupationPojo convertToPojo(Occupation occupation) {
+        long startTime = occupation.getStartDate().getTime();
+        long endTime = occupation.getEndDate().getTime();
+
+        if (isOccupationWithNoLocations(occupation)) {
+            Log.d("Pojo", "++++++++++++++++++++++++NO LOCATION++++++++++++++++++++++++++++++++++");
+            return new OccupationPojo("", "", "", startTime, endTime);
+        }
+        String longitudeString = createLongitudeString(occupation);
+        String latitudeString = createLatitudeString(occupation);
+        String altitudeString = createAltitudeString(occupation);
+
 
         return new OccupationPojo(longitudeString, latitudeString, altitudeString, startTime, endTime);
     }
+
 
     public static Occupation convertToOccupation(OccupationPojo occupationPojo) {
         List<Location> locationList = createLocationList(occupationPojo);
@@ -33,15 +41,17 @@ public class PojoConverter {
         return occupation;
     }
 
-    private static List<Location> createLocationList(OccupationPojo occupationDojo) {
-        String[] longitudeArray = occupationDojo.getLongitudeString().split("\\"+DELIMITER);
-        String[] latitudeArray = occupationDojo.getLatitudeString().split("\\"+DELIMITER);
-        String[] altitudeArray = occupationDojo.getAltitudeString().split("\\"+DELIMITER);
-
+    private static List<Location> createLocationList(OccupationPojo occupationPojo) {
         List<Location> locationList = new ArrayList<>();
+        if (isPojoWithNoLocation(occupationPojo)) {
+            return locationList;
+        }
+        String[] longitudeArray = occupationPojo.getLongitudeString().split("\\" + DELIMITER);
+        String[] latitudeArray = occupationPojo.getLatitudeString().split("\\" + DELIMITER);
+        String[] altitudeArray = occupationPojo.getAltitudeString().split("\\" + DELIMITER);
 
-        if(arrayLengthAreOK(longitudeArray, latitudeArray, altitudeArray)){
-            for(int i =0; i<longitudeArray.length;i++){
+        if (arrayLengthAreOK(longitudeArray, latitudeArray, altitudeArray)) {
+            for (int i = 0; i < longitudeArray.length; i++) {
                 Location currentLocation = new Location("");
                 currentLocation.setLongitude(Double.parseDouble(longitudeArray[i]));
                 currentLocation.setLatitude(Double.parseDouble(latitudeArray[i]));
@@ -52,15 +62,31 @@ public class PojoConverter {
         return locationList;
     }
 
-    private static boolean arrayLengthAreOK(String[] longitudeArray, String[] latitudeArray, String[] altitudeArray) {
+    private static boolean isPojoWithNoLocation(OccupationPojo occupationPojo) {
+        if (occupationPojo.getAltitudeString().isEmpty()
+                || occupationPojo.getLongitudeString().isEmpty()
+                || occupationPojo.getLatitudeString().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isOccupationWithNoLocations(Occupation occupation) {
+        if (occupation.getLocationList().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean arrayLengthAreOK(String[] longitudeArray, String[]
+            latitudeArray, String[] altitudeArray) {
         int longSize = longitudeArray.length;
         int latSize = latitudeArray.length;
         int altSize = altitudeArray.length;
 
-        if(longSize == latSize && latSize == altSize){
+        if (longSize == latSize && latSize == altSize) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -77,10 +103,9 @@ public class PojoConverter {
     }
 
 
-
     private static String createAltitudeString(Occupation runningOccupation) {
         StringBuilder sb = new StringBuilder();
-        for(Location l : runningOccupation.getLocationList()){
+        for (Location l : runningOccupation.getLocationList()) {
             sb.append(l.getAltitude());
             sb.append(DELIMITER);
         }
@@ -89,7 +114,7 @@ public class PojoConverter {
 
     private static String createLatitudeString(Occupation runningOccupation) {
         StringBuilder sb = new StringBuilder();
-        for(Location l : runningOccupation.getLocationList()){
+        for (Location l : runningOccupation.getLocationList()) {
             sb.append(l.getLatitude());
             sb.append(DELIMITER);
         }
@@ -98,7 +123,7 @@ public class PojoConverter {
 
     private static String createLongitudeString(Occupation runningOccupation) {
         StringBuilder sb = new StringBuilder();
-        for(Location l : runningOccupation.getLocationList()){
+        for (Location l : runningOccupation.getLocationList()) {
             sb.append(l.getLongitude());
             sb.append(DELIMITER);
         }

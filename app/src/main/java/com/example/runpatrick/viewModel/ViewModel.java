@@ -10,12 +10,14 @@ import com.example.runpatrick.model.datastructure.Occupation;
 import java.util.List;
 
 /**
- * an interface for the ViewModel. All methods the UI needs are listed here. It gets its data from a repository one layer under the ViewModel,
- * offering the same methods (maybe the repository is implementing the same Interface like the ViewModel)
+ * an interface for the ViewModel. All methods the UI needs are listed here.
+ * It gets its data from a repository one layer under the ViewModel and provides
+ * observable LiveData
  */
 public interface ViewModel {
 
     /**
+     * calculates the distance
      * @return the whole distance in km since tracking stared
      */
     LiveData<Double> getOccupationDistance();
@@ -37,7 +39,7 @@ public interface ViewModel {
     /**
      * - starts gps tracking
      * - starts distance calculating <-LiveData
-     * - starts timer <-LiveData
+     * - starts timer <-LiveData (in future)
      */
     void startTracking();
 
@@ -55,7 +57,6 @@ public interface ViewModel {
 
     /**
      * updates the LiveData
-     *
      * @param locationList all locations since tracking started
      */
     void update(List<Location> locationList);

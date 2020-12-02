@@ -12,7 +12,7 @@ import android.os.Bundle;
 import com.example.runpatrick.R;
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.datastructure.Occupation;
-import com.example.runpatrick.model.modelFacade.PojoConverter;
+import com.example.runpatrick.util.PojoConverter;
 import com.example.runpatrick.view.showOccupation.ShowOccupationActivity;
 import com.example.runpatrick.viewModel.ViewModel;
 import com.example.runpatrick.viewModel.ViewModelImpl;

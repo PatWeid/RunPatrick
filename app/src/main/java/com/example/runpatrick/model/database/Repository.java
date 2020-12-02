@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 /**
- * an interface for the repository. It`s the abstraction layer for the database and can only deal with simple
- * datastructures. If an occupations should be safed, it has to be converted to a POJO
+ * an interface for the repository. It`s the abstraction layer
+ * for the database and can only deal with simple
+ * datastructures. If an occupations is to be safed, it has to be
+ * converted to a POJO
  * -> just use PojoConverter.convertToPojo(Occupation occupation) or
  * PojoConverter.convertToOccupation(OccupationPojo occupationPojo)
  */

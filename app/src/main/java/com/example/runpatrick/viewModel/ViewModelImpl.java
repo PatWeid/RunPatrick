@@ -15,33 +15,25 @@ import com.example.runpatrick.model.modelFacade.ModelFacade;
 import com.example.runpatrick.model.datastructure.Occupation;
 import com.example.runpatrick.model.modelFacade.ModelFacadeImpl;
 //import com.example.runpatrick.model.modelFacade.ModelFactory;
+import com.example.runpatrick.model.modelFacade.ModelFactory;
 import com.example.runpatrick.model.occupationMaker.OccupationMakerImpl;
 
 import java.util.List;
 
 public class ViewModelImpl extends AndroidViewModel implements com.example.runpatrick.viewModel.ViewModel {
-    private ModelFacade model;
-    private LiveData<List<OccupationPojo>> allOccupasions = new MutableLiveData<>();
-    private MutableLiveData<Double> occupationDistance = new MutableLiveData<>();
-    private MutableLiveData<Long> occupationTime = new MutableLiveData<>();
+    private ModelFacade modelFacade;
+    private LiveData<List<OccupationPojo>> allOccupasions;
+    private MutableLiveData<Double> occupationDistance;
+    private MutableLiveData<Long> occupationTime;
 
     public ViewModelImpl(@NonNull Application application) {
         super(application);
         occupationDistance = new MutableLiveData<>();
         occupationTime = new MutableLiveData<>();
-
-        //for testing
-        //allOccupasions = new MutableLiveData<>();
-        //model = ModelFactory.produce();
         allOccupasions = new MutableLiveData<>();
-        occupationDistance = new MutableLiveData<>();
 
-        model = new ModelFacadeImpl(new DistanceCalculator(), new OccupationMakerImpl(), new RepositoryImpl(application));
-//        model.setDistanceCalculator(new DistanceCalculator());
-//        modelFacade.setOccupationMaker(new OccupationMakerImpl());
-//        modelFacade.setRepository(new RepositoryImpl(application));
-//        model = ModelFactory.produce(application);
-        allOccupasions = model.getAllOccupations();
+        modelFacade = ModelFactory.produce(application);
+        allOccupasions = modelFacade.getAllOccupations();
     }
 
     @Override
@@ -61,18 +53,18 @@ public class ViewModelImpl extends AndroidViewModel implements com.example.runpa
 
     @Override
     public void startTracking() {
-        this.model.startTracking();
+        this.modelFacade.startTracking();
     }
 
     @Override
     public void stopTracking(List<Location> locationList){
-        this.model.stopTracking(locationList);
+        this.modelFacade.stopTracking(locationList);
     }
 
     @Override
     public void update(List<Location> locationList) {
-        this.model.update(locationList);
-        occupationTime.setValue(model.getOccupationTime());
-        occupationDistance.setValue(model.getOccupationDistance());
+        this.modelFacade.update(locationList);
+//        occupationTime.setValue(model.getOccupationTime());
+        occupationDistance.setValue(modelFacade.getOccupationDistance());
     }
 }

@@ -12,6 +12,7 @@ public class GeoPointCreator {
         List<GeoPoint> geoPointList = new ArrayList<>();
         for (Location l : locationList) {
             GeoPoint geopoint = new GeoPoint(l.getLatitude(), l.getLongitude());
+            geopoint.setAltitude(l.getAltitude());
             geoPointList.add(geopoint);
         }
         return geoPointList;

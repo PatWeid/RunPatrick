@@ -16,16 +16,16 @@ import static org.junit.Assert.assertEquals;
 
 public class PojoConverterTest {
     private final double lat1 = 13.523;
-    private final double lat2 = 13.323242;
+    private final double lat2 = -13.323242;
     private final double lat3 = 18.45;
-    private final double lat4 = 1.5616656;
+    private final double lat4 = -1.5616656;
     private final double lat5 = 13.5;
 
     private final double lon1 = 50.645968;
-    private final double lon2 = 36.456;
+    private final double lon2 = -36.456;
     private final double lon3 = 8.45;
     private final double lon4 = 51.5616656;
-    private final double lon5 = 40.5;
+    private final double lon5 = -40.5;
 
 
 

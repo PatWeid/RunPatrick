@@ -14,7 +14,6 @@ import com.example.runpatrick.util.GeoPointCreator;
 import com.example.runpatrick.util.PojoConverter;
 import com.example.runpatrick.view.mapPrinter.MapPrinter;
 import com.example.runpatrick.view.mapPrinter.MapPrinterImpl;
-import com.example.runpatrick.util.DateConverter;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -23,6 +22,7 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ShowOccupationActivity extends AppCompatActivity {
@@ -61,7 +61,7 @@ public class ShowOccupationActivity extends AppCompatActivity {
         this.mapPrinter = new MapPrinterImpl();
         mapPrinter.setMap(map);
 
-        tvDate.setText(DateConverter.convertToString(occupation.getStartDate()));
+        tvDate.setText(new SimpleDateFormat("hh:mm - dd:MM:yyyy").format(occupation.getStartDate()));
         tvDistance.setText(String.format("%.2f", occupation.getDistanceInKilometers()) + " km");
         tvTime.setText(String.valueOf(occupation.getOccupationTimeInSeconds()) + " sek");
         tvSpeed.setText(occupation.getSpeed()[0] + " : " + occupation.getSpeed()[1] + " min/km");

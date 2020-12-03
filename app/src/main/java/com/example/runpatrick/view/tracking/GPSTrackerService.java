@@ -25,8 +25,13 @@ import java.util.List;
 public class GPSTrackerService extends Service implements LocationListener {
 
     private static final float MIN_DISTANCE_BETWEENUPDATES = 0.5f;
-    private static final long MIN_TIME_BETWEENUPDATES = 5;
-    private final float MIN_ACCURACY = 25.0f;
+    private static final long MIN_TIME_BETWEENUPDATES =1;
+    public static final float MIN_ACCURACY = 25.0f;
+    private static String PROVIDER = LocationManager.GPS_PROVIDER;
+
+    public static void setProvider(String provider){
+        PROVIDER = provider;
+    }
 
     //durch fusedLocationProviderClient ersetzen
     private LocationManager locationManager;
@@ -43,8 +48,9 @@ public class GPSTrackerService extends Service implements LocationListener {
         super.onCreate();
         locationList.clear();
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEENUPDATES, MIN_DISTANCE_BETWEENUPDATES, this);
+//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEENUPDATES, MIN_DISTANCE_BETWEENUPDATES, this);
 //        locationManager.requestLocationUpdates("locationtestprovider", MIN_TIME_BETWEENUPDATES, MIN_DISTANCE_BETWEENUPDATES, this);
+        locationManager.requestLocationUpdates(PROVIDER, MIN_TIME_BETWEENUPDATES, MIN_DISTANCE_BETWEENUPDATES, this);
     }
 
     @SuppressLint("MissingPermission")

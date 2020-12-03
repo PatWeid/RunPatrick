@@ -45,6 +45,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -157,6 +158,11 @@ public class TrackingActivityTest {
     @Test
     public void testGPS(){
         LocationManager locationManager = (LocationManager) InstrumentationRegistry.getInstrumentation().getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        GPSTrackerService.setProvider(TEST_MOCK_GPS_LOCATION);
+
+
+
         List providers = locationManager.getAllProviders();
         if (!providers.contains(TEST_MOCK_GPS_LOCATION)) {
             locationManager.addTestProvider(TEST_MOCK_GPS_LOCATION,
@@ -290,7 +296,8 @@ public class TrackingActivityTest {
         String distance = this.getText(withId(R.id.tvDistance));
         Log.d("TrackingActivityTest", "Distance: " + distance);
         List<Location> locationList = GPSTrackerService.getLocationList();
-        Log.d("Locationlist", "tracked locations: " + locationList.size());
+        assertEquals(5, locationList.size());
+
     }
 
 

@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.runpatrick.R;
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.datastructure.Occupation;
-import com.example.runpatrick.util.DateConverter;
 import com.example.runpatrick.util.PojoConverter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
     public void onBindViewHolder(@NonNull OccupationHolder holder, int position) {
         Occupation currentOccupation = PojoConverter.convertToOccupation(occupations.get(position));
 
-        holder.tvNumber.setText(DateConverter.convertToString(currentOccupation.getStartDate()));
+        holder.tvNumber.setText(new SimpleDateFormat("dd:MM:yy").format(currentOccupation.getStartDate()));
         holder.tvDistance.setText(String.format("%.2f", currentOccupation.getDistanceInKilometers())+"km");
     }
 

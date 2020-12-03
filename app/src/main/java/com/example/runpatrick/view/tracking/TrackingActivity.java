@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,11 +33,16 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.views.MapView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TrackingActivity extends AppCompatActivity {
 
     LocationUpdateHandler handler = new LocationUpdateHandler();
     ViewModel viewModel;
-    final MapPrinter mapPrinter = new MapPrinterImpl();
+    MapPrinter mapPrinter = new MapPrinterImpl();
+
+    TextView tvDebug;
 
     private class LocationUpdateHandler extends Handler {
         @Override
@@ -59,6 +63,9 @@ public class TrackingActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
+
+        //for testing:
+        tvDebug = findViewById(R.id.tvDebug);
 
         MapView map = (MapView) findViewById(R.id.map);
         //Mapnik - öffentlich verfügbaren Daten von openstreetmap
@@ -126,6 +133,8 @@ public class TrackingActivity extends AppCompatActivity {
                 tvDistance.setText(String.valueOf(newDistance));
             }
         });
+
+
     }
 
 //    private boolean isMyServiceRunning(Class<?> serviceClass) {

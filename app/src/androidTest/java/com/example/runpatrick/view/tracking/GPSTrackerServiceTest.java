@@ -131,6 +131,12 @@ public class GPSTrackerServiceTest {
         location.setElapsedRealtimeNanos(SystemClock.elapsedRealtimeNanos());
         locationManager.setTestProviderLocation(TEST_MOCK_GPS_LOCATION, location);
 
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         assertEquals(1, GPSTrackerService.getLocationList().size());
 
         //stop tracking

@@ -6,11 +6,9 @@ import androidx.lifecycle.LiveData;
 
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.database.Repository;
-import com.example.runpatrick.model.database.RepositoryImpl;
 import com.example.runpatrick.model.datastructure.DistanceCalculator;
 import com.example.runpatrick.model.datastructure.Occupation;
 import com.example.runpatrick.model.occupationMaker.OccupationMaker;
-import com.example.runpatrick.model.occupationMaker.OccupationMakerImpl;
 import com.example.runpatrick.util.PojoConverter;
 
 import java.util.List;
@@ -19,19 +17,11 @@ import java.util.List;
 public class ModelFacadeImpl implements  ModelFacade{
     private OccupationMaker occupationMaker;
     private Repository repository;
+    private TimeCalculator timeCalculator;
     private DistanceCalculator distanceCalculator;
     long occupationTime;
     double distance;
 
-    public ModelFacadeImpl(DistanceCalculator distanceCalculator, OccupationMakerImpl occupationMaker, RepositoryImpl repository) {
-        this.distanceCalculator = distanceCalculator;
-        this.occupationMaker = occupationMaker;
-        this.repository = repository;
-    }
-
-    public ModelFacadeImpl() {
-
-    }
 
     public void setOccupationMaker(OccupationMaker occupationMaker) {
         this.occupationMaker = occupationMaker;
@@ -45,13 +35,18 @@ public class ModelFacadeImpl implements  ModelFacade{
         this.distanceCalculator = distanceCalculator;
     }
 
-    @Override
-    public void startTracking(){
-        this.occupationMaker.startTracking();
+    public void setTimeCalculator(TimeCalculator timeCalculator) {
+        this.timeCalculator = timeCalculator;
     }
 
     @Override
-    public void stopTracking(List<Location> locationList){
+    public void startTracking() throws wrongSequenceException {
+        this.occupationMaker.startTracking();
+        this.timeCalculator.startTracking();
+    }
+
+    @Override
+    public void stopTracking(List<Location> locationList) throws wrongSequenceException {
         Occupation trackedOccupation = this.occupationMaker.stopTracking(locationList);
         OccupationPojo trackedOccupationPojo = PojoConverter.convertToPojo(trackedOccupation);
         this.repository.insert(trackedOccupationPojo);
@@ -59,6 +54,8 @@ public class ModelFacadeImpl implements  ModelFacade{
 
     @Override
     public void update(List<Location> locationList) {
+        this.timeCalculator.update();
+        this.occupationTime = this.timeCalculator.getOccupationTime();
         this.distance = this.distanceCalculator.calculateDistanceInMeters(locationList);
 
     }
@@ -70,8 +67,7 @@ public class ModelFacadeImpl implements  ModelFacade{
 
     @Override
     public Long getOccupationTime() {
-       //todo
-        return occupationTime;
+       return timeCalculator.getOccupationTime();
     }
 
     @Override

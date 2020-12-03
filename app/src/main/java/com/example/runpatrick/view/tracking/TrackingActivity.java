@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.runpatrick.R;
+import com.example.runpatrick.model.modelFacade.wrongSequenceException;
 import com.example.runpatrick.view.mapPrinter.MapPrinter;
 import com.example.runpatrick.view.mapPrinter.MapPrinterImpl;
 import com.example.runpatrick.view.showHistory.ShowHistoryActivity;
@@ -91,28 +92,33 @@ public class TrackingActivity extends AppCompatActivity {
         final Button btStart = (Button) findViewById(R.id.btStart);
         final Button btStop = (Button) findViewById(R.id.btStop);
         Button btHistory = (Button) findViewById(R.id.btHistory);
-        btStop.setEnabled(false);
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btStop.setEnabled(true);
-                btStart.setEnabled(false);
-                viewModel.startTracking();
-                Toast.makeText(TrackingActivity.this, "Tracking starts", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
-                startService(intent);
+                try {
+                    viewModel.startTracking();
+                    Toast.makeText(TrackingActivity.this, "Tracking starts", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
+                    startService(intent);
+                } catch (wrongSequenceException e) {
+                    Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         btStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btStart.setEnabled(true);
-                btStop.setEnabled(false);
-                viewModel.stopTracking(GPSTrackerService.getLocationList());
-                Toast.makeText(TrackingActivity.this, "Tracking stopped", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
-                stopService(intent);
+                try {
+                    viewModel.stopTracking(GPSTrackerService.getLocationList());
+                    Toast.makeText(TrackingActivity.this, "Tracking stopped", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
+                    stopService(intent);
+                } catch (wrongSequenceException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -131,6 +137,14 @@ public class TrackingActivity extends AppCompatActivity {
             @Override
             public void onChanged(Double newDistance) {
                 tvDistance.setText(String.valueOf(newDistance));
+            }
+        });
+
+        //observe occupationtime
+        viewModel.getOccupationTime().observe(this, new Observer<Long>() {
+            @Override
+            public void onChanged(Long newOccupationTime) {
+                tvDebug.setText(String.valueOf(newOccupationTime/1000));
             }
         });
 

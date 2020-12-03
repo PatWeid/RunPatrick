@@ -3,6 +3,7 @@ package com.example.runpatrick.model.occupationMaker;
 import android.location.Location;
 
 import com.example.runpatrick.model.datastructure.Occupation;
+import com.example.runpatrick.model.modelFacade.wrongSequenceException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface OccupationMaker {
     /**
      * method that is called when tracking starts
      */
-    void startTracking();
+    void startTracking() throws wrongSequenceException;
 
     /**
      * method that is called when tracking stops
@@ -22,5 +23,5 @@ public interface OccupationMaker {
      * @param locationList list with all locations collected during tracking
      * @return occupation that is created. Start- and endDate will be created automatically
      */
-    Occupation stopTracking(List<Location> locationList);
+    Occupation stopTracking(List<Location> locationList) throws wrongSequenceException;
 }

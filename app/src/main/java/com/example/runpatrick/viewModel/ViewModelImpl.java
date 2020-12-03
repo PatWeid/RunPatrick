@@ -16,6 +16,7 @@ import com.example.runpatrick.model.datastructure.Occupation;
 import com.example.runpatrick.model.modelFacade.ModelFacadeImpl;
 //import com.example.runpatrick.model.modelFacade.ModelFactory;
 import com.example.runpatrick.model.modelFacade.ModelFactory;
+import com.example.runpatrick.model.modelFacade.wrongSequenceException;
 import com.example.runpatrick.model.occupationMaker.OccupationMakerImpl;
 
 import java.util.List;
@@ -52,19 +53,24 @@ public class ViewModelImpl extends AndroidViewModel implements com.example.runpa
     }
 
     @Override
-    public void startTracking() {
+    public void startTracking() throws wrongSequenceException {
         this.modelFacade.startTracking();
     }
 
     @Override
-    public void stopTracking(List<Location> locationList){
+    public void stopTracking(List<Location> locationList) throws wrongSequenceException {
         this.modelFacade.stopTracking(locationList);
     }
 
     @Override
     public void update(List<Location> locationList) {
         this.modelFacade.update(locationList);
-//        occupationTime.setValue(model.getOccupationTime());
+        occupationTime.setValue(modelFacade.getOccupationTime());
         occupationDistance.setValue(modelFacade.getOccupationDistance());
+    }
+
+    @Override
+    public LiveData<Long> getOccupationTime() {
+        return this.occupationTime;
     }
 }

@@ -93,11 +93,6 @@ public class TrackingActivityTest {
         onView(withId(R.id.tvDistance)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void valueOfDistanceIsZero() {
-        onView(withId(R.id.tvDistance)).check(matches(withText("0.0")));
-    }
-
 
     @Test
     public void historyButtonStartsShowHistoryActivity() {

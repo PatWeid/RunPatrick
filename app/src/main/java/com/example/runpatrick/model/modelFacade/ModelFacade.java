@@ -17,12 +17,12 @@ public interface ModelFacade {
      * call this method to stop tracking. make sure startTracking() was called before
      * @param locationList list with the tracked locations.
      */
-    void stopTracking(List<Location> locationList);
+    void stopTracking(List<Location> locationList) throws wrongSequenceException;
 
     /**
      * call this method to start tracking. make sure to call it only once.
      */
-    void startTracking();
+    void startTracking() throws wrongSequenceException;
 
     /**
      * updates all data in the model

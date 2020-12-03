@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.runpatrick.model.database.OccupationPojo;
 import com.example.runpatrick.model.datastructure.Occupation;
+import com.example.runpatrick.model.modelFacade.wrongSequenceException;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public interface ViewModel {
      * - starts distance calculating <-LiveData
      * - starts timer <-LiveData (in future)
      */
-    void startTracking();
+    void startTracking() throws wrongSequenceException;
 
     /**
      * * - stops tracking
@@ -52,7 +53,7 @@ public interface ViewModel {
      *
      * @param locationList list with all locations at the end of tracking
      */
-    void stopTracking(List<Location> locationList);
+    void stopTracking(List<Location> locationList) throws wrongSequenceException;
 
 
     /**
@@ -60,4 +61,6 @@ public interface ViewModel {
      * @param locationList all locations since tracking started
      */
     void update(List<Location> locationList);
+
+    LiveData<Long> getOccupationTime();
 }

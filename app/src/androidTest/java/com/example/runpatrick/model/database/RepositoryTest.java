@@ -34,7 +34,7 @@ public class RepositoryTest {
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
 
     @Test
-    public void insertAndLoad(){
+    public void insertAndLoad() {
         Application application = ApplicationProvider.getApplicationContext();
 
         Repository repository = new RepositoryImpl(application);
@@ -53,6 +53,6 @@ public class RepositoryTest {
         });
         Occupation loadedOccupation = PojoConverter.convertToOccupation(loadedPojo[0]);
 
-        assertEquals(loadedOccupation.getStartDate(), startDate);
+        assertEquals(startDate, loadedOccupation.getStartDate());
     }
 }

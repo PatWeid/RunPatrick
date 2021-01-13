@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class SpeedCalculatorTest {
 
     @Test
-    public void zeroTimeTest(){
+    public void zeroTimeTest() {
         SpeedCalculator speedCalculator = new SpeedCalculator();
         int[] speed = speedCalculator.calculateSpeedInMinPerKilometer(5654654656.0, 0L);
 
@@ -19,7 +19,7 @@ public class SpeedCalculatorTest {
     }
 
     @Test
-    public void zeroKilometersTest(){
+    public void zeroKilometersTest() {
         SpeedCalculator speedCalculator = new SpeedCalculator();
         int[] speed = speedCalculator.calculateSpeedInMinPerKilometer(0.0, 654614L);
 
@@ -31,7 +31,7 @@ public class SpeedCalculatorTest {
     }
 
     @Test
-    public void calculateSpeedTest_1(){
+    public void calculateSpeedTest_1() {
         SpeedCalculator speedCalculator = new SpeedCalculator();
         int[] speed = speedCalculator.calculateSpeedInMinPerKilometer(1.0, 60L);
 
@@ -43,9 +43,9 @@ public class SpeedCalculatorTest {
     }
 
     @Test
-    public void calculateSpeedForMarathonIn4Hours(){
+    public void calculateSpeedForMarathonIn4Hours() {
         SpeedCalculator speedCalculator = new SpeedCalculator();
-        long fourHours = 60*60*4;
+        long fourHours = 60 * 60 * 4;
         int[] speed = speedCalculator.calculateSpeedInMinPerKilometer(42.195, fourHours);
 
         int minutes = speed[0];

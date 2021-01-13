@@ -28,10 +28,8 @@ public class PojoConverterTest {
     private final double lon5 = -40.5;
 
 
-
-
     @Test
-    public void convertToPojoAndBack_checkLocationListsAreEqual(){
+    public void convertToPojoAndBack_checkLocationListsAreEqual() {
         Date startDate = new Date(100L);
         Date endDate = new Date(50000L);
         Occupation originalOccupation = OccupationFactory.produceOccupation(this.getLocationList(), startDate, endDate);
@@ -47,7 +45,7 @@ public class PojoConverterTest {
 
         Location originalLocation, reConvertedLocation;
 
-        for(int i =0;i<originalList.size();i++){
+        for (int i = 0; i < originalList.size(); i++) {
             originalLocation = originalList.get(i);
             reConvertedLocation = reConvertedList.get(i);
 
@@ -57,7 +55,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_checkStartDatesAreEqual(){
+    public void convertToPojoAndBack_checkStartDatesAreEqual() {
         Date originalStartDate = new Date(1286492L);
 
         Occupation originalOccupation = OccupationFactory.produceOccupation(this.getLocationList(), originalStartDate, new Date());
@@ -70,7 +68,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_checkEndDatesAreEqual(){
+    public void convertToPojoAndBack_checkEndDatesAreEqual() {
         Date originalEndDate = new Date(16492L);
 
         Occupation originalOccupation = OccupationFactory.produceOccupation(this.getLocationList(), new Date(), originalEndDate);
@@ -83,7 +81,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_emptyLocationList_checkLocationListsAreEqual(){
+    public void convertToPojoAndBack_emptyLocationList_checkLocationListsAreEqual() {
         Date startDate = new Date(100L);
         Date endDate = new Date(50000L);
         Occupation originalOccupation = OccupationFactory.produceOccupation(new ArrayList<>(), startDate, endDate);
@@ -99,7 +97,7 @@ public class PojoConverterTest {
 
         Location originalLocation, reConvertedLocation;
 
-        for(int i =0;i<originalList.size();i++){
+        for (int i = 0; i < originalList.size(); i++) {
             originalLocation = originalList.get(i);
             reConvertedLocation = reConvertedList.get(i);
 
@@ -109,7 +107,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_emptyLocationList_checkStartDatesAreEqual(){
+    public void convertToPojoAndBack_emptyLocationList_checkStartDatesAreEqual() {
         Date originalStartDate = new Date(1286492L);
 
         Occupation originalOccupation = OccupationFactory.produceOccupation(new ArrayList<>(), originalStartDate, new Date());
@@ -122,7 +120,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_emptyLocationList_checkEndDatesAreEqual(){
+    public void convertToPojoAndBack_emptyLocationList_checkEndDatesAreEqual() {
         Date originalEndDate = new Date(16492L);
 
         Occupation originalOccupation = OccupationFactory.produceOccupation(new ArrayList<>(), new Date(), originalEndDate);
@@ -135,7 +133,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_oneLocationInList_checkLocationListsAreEqual(){
+    public void convertToPojoAndBack_oneLocationInList_checkLocationListsAreEqual() {
         Date startDate = new Date(100L);
         Date endDate = new Date(50000L);
 
@@ -155,7 +153,7 @@ public class PojoConverterTest {
 
         Location originalLocation, reConvertedLocation;
 
-        for(int i =0;i<originalList.size();i++){
+        for (int i = 0; i < originalList.size(); i++) {
             originalLocation = originalList.get(i);
             reConvertedLocation = reConvertedList.get(i);
 
@@ -165,7 +163,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_oneLocationInList_checkStartDatesAreEqual(){
+    public void convertToPojoAndBack_oneLocationInList_checkStartDatesAreEqual() {
         Date originalStartDate = new Date(1286492L);
 
         List<Location> listWithOneLocation = new ArrayList<>();
@@ -181,7 +179,7 @@ public class PojoConverterTest {
     }
 
     @Test
-    public void convertToPojoAndBack_oneLocationInList_checkEndDatesAreEqual(){
+    public void convertToPojoAndBack_oneLocationInList_checkEndDatesAreEqual() {
         Date originalEndDate = new Date(16492L);
 
         List<Location> listWithOneLocation = new ArrayList<>();

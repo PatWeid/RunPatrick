@@ -41,7 +41,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-//@RunWith(AndroidJUnit4.class)
+
 public class GPSTrackerServiceTest {
 
     private static final String TEST_MOCK_GPS_LOCATION = "locationtestprovider";
@@ -438,11 +438,11 @@ public class GPSTrackerServiceTest {
 //    public void TrackingActivityGetsMessageWhenLocationIsChanged(){
 //
 //        MapPrinter mockedMapPrinter = mock(MapPrinterImpl.class);
-//        //        ((TrackingActivity)getActivity(InstrumentationRegistry.getInstrumentation().getContext())).mapPrinter
-////                = mockedMapPrinter;
+//        ((TrackingActivity) getActivity(InstrumentationRegistry.getInstrumentation().getContext())).mapPrinter
+//                = mockedMapPrinter;
 //
-////        ((TrackingActivity) Objects.requireNonNull(getActivity(InstrumentationRegistry.getInstrumentation().getContext()))).mapPrinter
-////                = mockedMapPrinter;
+//        ((TrackingActivity) Objects.requireNonNull(getActivity(InstrumentationRegistry.getInstrumentation().getContext()))).mapPrinter
+//                = mockedMapPrinter;
 //
 //                ((TrackingActivity) getActivity(InstrumentationRegistry.getInstrumentation().getContext())).viewModel
 //                = mock(ViewModelImpl.class);

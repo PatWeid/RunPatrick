@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class RepositoryImpl implements Repository{
+public class RepositoryImpl implements Repository {
     private final OccupationPojoDao occupationPojoDao;
     private final LiveData<List<OccupationPojo>> allOccupations;
 
@@ -17,16 +17,16 @@ public class RepositoryImpl implements Repository{
         this.allOccupations = occupationPojoDao.getAllOccupations();
     }
 
-    public void insert(OccupationPojo occupation){
-        new InsertOccupationAsyncTask(occupationPojoDao).execute(occupation);
+    public void insert(OccupationPojo occupationPojo) {
+        new InsertOccupationAsyncTask(occupationPojoDao).execute(occupationPojo);
     }
 
-    public void delete(OccupationPojo occupation){
+    public void delete(OccupationPojo occupation) {
         new DeleteOccupationAsyncTask(occupationPojoDao).execute(occupation);
     }
 
     //keine DB Operation -> kann so implementiert werden
-    public LiveData<List<OccupationPojo>> getAllOccupations(){
+    public LiveData<List<OccupationPojo>> getAllOccupations() {
         return allOccupations;
     }
 
@@ -34,7 +34,7 @@ public class RepositoryImpl implements Repository{
     private static class InsertOccupationAsyncTask extends AsyncTask<OccupationPojo, Void, Void> {
         private final OccupationPojoDao occupationPojoDao;
 
-        private InsertOccupationAsyncTask(OccupationPojoDao occupationPojoDao){
+        private InsertOccupationAsyncTask(OccupationPojoDao occupationPojoDao) {
             this.occupationPojoDao = occupationPojoDao;
         }
 
@@ -49,7 +49,7 @@ public class RepositoryImpl implements Repository{
     private static class DeleteOccupationAsyncTask extends AsyncTask<OccupationPojo, Void, Void> {
         private final OccupationPojoDao occupationPojoDao;
 
-        private DeleteOccupationAsyncTask(OccupationPojoDao occupationPojoDao){
+        private DeleteOccupationAsyncTask(OccupationPojoDao occupationPojoDao) {
             this.occupationPojoDao = occupationPojoDao;
         }
 

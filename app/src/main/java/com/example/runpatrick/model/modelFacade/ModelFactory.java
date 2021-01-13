@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.runpatrick.model.database.RepositoryImpl;
 import com.example.runpatrick.model.datastructure.DistanceCalculator;
 import com.example.runpatrick.model.occupationMaker.OccupationMakerImpl;
+import com.example.runpatrick.model.timeCalculator.TimeCalculatorImpl;
 
 
 public class ModelFactory {

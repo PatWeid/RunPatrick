@@ -17,6 +17,7 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import org.osmdroid.views.MapView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class TrackingActivity extends AppCompatActivity {
 
@@ -65,7 +67,7 @@ public class TrackingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-        //for testing:
+
         tvDebug = findViewById(R.id.tvDebug);
 
         MapView map = (MapView) findViewById(R.id.map);
@@ -101,7 +103,7 @@ public class TrackingActivity extends AppCompatActivity {
                     Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
                     startService(intent);
                 } catch (wrongSequenceException e) {
-                    Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    tvDebug.setText(e.getMessage());
                 }
             }
         });
@@ -115,8 +117,7 @@ public class TrackingActivity extends AppCompatActivity {
                     Intent intent = new Intent(TrackingActivity.this, GPSTrackerService.class);
                     stopService(intent);
                 } catch (wrongSequenceException e) {
-                    e.printStackTrace();
-                    Toast.makeText(ctx, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    tvDebug.setText(e.getMessage());
                 }
 
             }
@@ -141,26 +142,18 @@ public class TrackingActivity extends AppCompatActivity {
         });
 
         //observe occupationtime
+        TextView tvTime = findViewById(R.id.tvTime);
         viewModel.getOccupationTime().observe(this, new Observer<Long>() {
             @Override
             public void onChanged(Long newOccupationTime) {
-                tvDebug.setText(String.valueOf(newOccupationTime/1000));
+//                tvTime.setText(String.valueOf(newOccupationTime/1000));
+                tvTime.setText(new SimpleDateFormat("mm:ss", Locale.GERMAN).format(newOccupationTime));
+                Log.d("TrackingActivity", "OccupationTime: " + newOccupationTime);
             }
         });
 
 
     }
-
-//    private boolean isMyServiceRunning(Class<?> serviceClass) {
-//        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-//            if (serviceClass.getName().equals(service.service.getClassName())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
 
     @Override
     protected void onResume() {

@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class DistanceCalculatorTest {
 
     @Test
-    public void calculateDistanceWithoutLocations(){
+    public void calculateDistanceWithoutLocations() {
         DistanceCalculator distanceCalculator = new DistanceCalculator();
 
         double distance = distanceCalculator.calculateDistanceInMeters(new ArrayList<>());
@@ -24,7 +24,7 @@ public class DistanceCalculatorTest {
     }
 
     @Test
-    public void calculateDistanceWithOneLocation(){
+    public void calculateDistanceWithOneLocation() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(5.4410);
         when(l1.getLatitude()).thenReturn(10.5859);
@@ -38,7 +38,7 @@ public class DistanceCalculatorTest {
     }
 
     @Test
-    public void calculateDistanceBetweenTwoLocations(){
+    public void calculateDistanceBetweenTwoLocations() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.4410);
         when(l1.getLatitude()).thenReturn(13.5859);
@@ -61,7 +61,7 @@ public class DistanceCalculatorTest {
     }
 
     @Test
-    public void calculateDistanceBetweenSomeLocations(){
+    public void calculateDistanceBetweenSomeLocations() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.6210);
         when(l1.getLatitude()).thenReturn(13.1724);
@@ -88,7 +88,7 @@ public class DistanceCalculatorTest {
     }
 
     @Test
-    public void calculateDistanceBetweenNearLocations(){
+    public void calculateDistanceBetweenNearLocations() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.4588);
         when(l1.getLatitude()).thenReturn(13.5258);

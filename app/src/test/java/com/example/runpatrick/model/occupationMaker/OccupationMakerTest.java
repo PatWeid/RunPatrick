@@ -3,6 +3,7 @@ package com.example.runpatrick.model.occupationMaker;
 import android.location.Location;
 
 import com.example.runpatrick.model.datastructure.Occupation;
+import com.example.runpatrick.model.modelFacade.wrongSequenceException;
 
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class OccupationMakerTest {
 
     @Test
-    public void occupationDatesWereSetRight(){
+    public void occupationDatesWereSetRight() throws wrongSequenceException {
         OccupationMaker occupationMaker = new OccupationMakerImpl();
 
         occupationMaker.startTracking();
@@ -80,7 +81,7 @@ public class OccupationMakerTest {
     }
 
     @Test
-    public void locationsWereSetRight(){
+    public void locationsWereSetRight() throws wrongSequenceException {
         OccupationMaker occupationMaker = new OccupationMakerImpl();
 
         occupationMaker.startTracking();
@@ -141,11 +142,11 @@ public class OccupationMakerTest {
 
         List<Location> listFromCreatedOccupation = createdOccupation.getLocationList();
 
-        for(int i =0;i<listFromCreatedOccupation.size();i++){
-            if(locationList.get(i).getLongitude() == listFromCreatedOccupation.get(i).getLongitude()
-            && locationList.get(i).getLatitude() == listFromCreatedOccupation.get(i).getLatitude()){
+        for (int i = 0; i < listFromCreatedOccupation.size(); i++) {
+            if (locationList.get(i).getLongitude() == listFromCreatedOccupation.get(i).getLongitude()
+                    && locationList.get(i).getLatitude() == listFromCreatedOccupation.get(i).getLatitude()) {
                 return;
-            }else{
+            } else {
                 fail();
             }
         }

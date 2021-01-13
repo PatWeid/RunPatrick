@@ -1,5 +1,6 @@
 package com.example.runpatrick.model.datastructure;
 
+
 import android.location.Location;
 
 import org.junit.Test;
@@ -16,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class OccupationTest {
 
     @Test
-    public void getLocationListTest(){
+    public void getLocationListTest() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -74,18 +75,18 @@ public class OccupationTest {
 
         List<Location> locationListFromOccupation = occupation.getLocationList();
 
-        for(int i =0; i<locationListFromOccupation.size();i++){
-            if(locationListFromOccupation.get(i).getLatitude() == locationList.get(i).getLatitude()
-                    && locationListFromOccupation.get(i).getLongitude() == locationList.get(i).getLongitude() ){
+        for (int i = 0; i < locationListFromOccupation.size(); i++) {
+            if (locationListFromOccupation.get(i).getLatitude() == locationList.get(i).getLatitude()
+                    && locationListFromOccupation.get(i).getLongitude() == locationList.get(i).getLongitude()) {
                 return;
-            }else{
+            } else {
                 fail();
             }
         }
     }
 
     @Test
-    public void calculatePosAltitudeWithoutLocation(){
+    public void calculatePosAltitudeWithoutLocation() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -96,7 +97,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateNegAltitudeWithoutLocation(){
+    public void calculateNegAltitudeWithoutLocation() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -107,7 +108,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculatePosAltitude_OnlyOneLocation(){
+    public void calculatePosAltitude_OnlyOneLocation() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -121,7 +122,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateNegAltitude_OnlyOneLocation(){
+    public void calculateNegAltitude_OnlyOneLocation() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -135,7 +136,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculatePosAltitude_1(){
+    public void calculatePosAltitude_1() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -155,7 +156,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculatePosAltitude_2(){
+    public void calculatePosAltitude_2() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -175,7 +176,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculatePosAltitude_3(){
+    public void calculatePosAltitude_3() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -204,7 +205,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateNegAltitude_1(){
+    public void calculateNegAltitude_1() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -224,7 +225,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateNegAltitude_2(){
+    public void calculateNegAltitude_2() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -241,7 +242,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateNegAltitude_3(){
+    public void calculateNegAltitude_3() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -258,7 +259,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateNegAltitude_4(){
+    public void calculateNegAltitude_4() {
         Date startDate = new Date();
         Date endDate = new Date();
         List<Location> locationList = new ArrayList<>();
@@ -287,7 +288,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void getOccupationTimeTest(){
+    public void getOccupationTimeTest() {
         long startTime = 1312556L;
         long occupationTimeinMillisec = 1000 * 650; //650seconds
         Date startDate = new Date(startTime);
@@ -299,14 +300,14 @@ public class OccupationTest {
     }
 
     @Test
-    public void getDistanceInKilometersWithoutLocations(){
+    public void getDistanceInKilometersWithoutLocations() {
         Occupation occupation = OccupationFactory.produceOccupation(new ArrayList<>(), new Date(), new Date());
 
         assertEquals(0, occupation.getDistanceInKilometers(), 0);
     }
 
     @Test
-    public void getDistanceInKilometersWithOneLocation(){
+    public void getDistanceInKilometersWithOneLocation() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(5.4410);
         when(l1.getLatitude()).thenReturn(10.5859);
@@ -318,7 +319,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void getDistanceInKilometersWithTwoLocations(){
+    public void getDistanceInKilometersWithTwoLocations() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.4410);
         when(l1.getLatitude()).thenReturn(13.5859);
@@ -334,7 +335,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void getDistanceBetweenSomeLocations(){
+    public void getDistanceBetweenSomeLocations() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.6210);
         when(l1.getLatitude()).thenReturn(13.1724);
@@ -358,7 +359,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void calculateDistanceBetweenNearLocations(){
+    public void calculateDistanceBetweenNearLocations() {
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.4588);
         when(l1.getLatitude()).thenReturn(13.5258);
@@ -421,7 +422,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void getSpeedWithZeroTimeTest(){
+    public void getSpeedWithZeroTimeTest() {
         Date startAndEndDate = new Date();
 
         Location l1 = mock(Location.class);
@@ -449,7 +450,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void getSpeedWithZeroKilometersTest(){
+    public void getSpeedWithZeroKilometersTest() {
         Occupation occupation = OccupationFactory.produceOccupation(new ArrayList<>(), new Date(), new Date());
 
         int[] speed = occupation.getSpeed();
@@ -461,7 +462,7 @@ public class OccupationTest {
     }
 
     @Test
-    public void getSpeedForMarathonIn4Hours(){
+    public void getSpeedForMarathonIn4Hours() {
         //Distance between l1 and l2 = Marathon(~42.2km)
         Location l1 = mock(Location.class);
         when(l1.getLongitude()).thenReturn(52.0000);
@@ -474,7 +475,7 @@ public class OccupationTest {
         locationList.add(l2);
 
         long startTime = 65581L;
-        long endTime = startTime + 4*60*60*1000; //4hours more than startTime
+        long endTime = startTime + 4 * 60 * 60 * 1000; //4hours more than startTime
         Date startDate = new Date(startTime);
         Date endDate = new Date(endTime);
 

@@ -20,7 +20,6 @@ public class PojoConverter {
         long endTime = occupation.getEndDate().getTime();
 
         if (isOccupationWithNoLocations(occupation)) {
-            Log.d("Pojo", "++++++++++++++++++++++++NO LOCATION++++++++++++++++++++++++++++++++++");
             return new OccupationPojo("", "", "", startTime, endTime);
         }
         String longitudeString = createLongitudeString(occupation);

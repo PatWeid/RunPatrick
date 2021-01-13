@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 public class AltitudeCalculatorTest {
 
     @Test
-    public void calculatePosAltitudeWithoutLocation(){
+    public void calculatePosAltitudeWithoutLocation() {
         List<Location> locationList = new ArrayList<>();
 
         AltitudeCalculator altitudeCalculator = new AltitudeCalculator();
@@ -23,7 +23,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculateNegAltitudeWithoutLocation(){
+    public void calculateNegAltitudeWithoutLocation() {
         List<Location> locationList = new ArrayList<>();
 
         AltitudeCalculator altitudeCalculator = new AltitudeCalculator();
@@ -32,7 +32,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculatePosAltitude_OnlyOneLocation(){
+    public void calculatePosAltitude_OnlyOneLocation() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         l1.setAltitude(9000.0);
@@ -44,7 +44,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculateNegAltitude_OnlyOneLocation(){
+    public void calculateNegAltitude_OnlyOneLocation() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         l1.setAltitude(9000.0);
@@ -56,7 +56,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculatePosAltitude_1(){
+    public void calculatePosAltitude_1() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(9000.0);
@@ -75,7 +75,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculatePosAltitude_2(){
+    public void calculatePosAltitude_2() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(9000.0);
@@ -94,7 +94,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculatePosAltitude_3(){
+    public void calculatePosAltitude_3() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(101.0);
@@ -122,7 +122,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculateNegAltitude_1(){
+    public void calculateNegAltitude_1() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(9000.0);
@@ -141,7 +141,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculateNegAltitude_2(){
+    public void calculateNegAltitude_2() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(10.0);
@@ -157,7 +157,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculateNegAltitude_3(){
+    public void calculateNegAltitude_3() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(10.0);
@@ -173,7 +173,7 @@ public class AltitudeCalculatorTest {
     }
 
     @Test
-    public void calculateNegAltitude_4(){
+    public void calculateNegAltitude_4() {
         List<Location> locationList = new ArrayList<>();
         Location l1 = mock(Location.class);
         when(l1.getAltitude()).thenReturn(101.0);

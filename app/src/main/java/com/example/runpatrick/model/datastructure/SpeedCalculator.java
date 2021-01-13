@@ -2,7 +2,7 @@ package com.example.runpatrick.model.datastructure;
 
 public class SpeedCalculator {
     public int[] calculateSpeedInMinPerKilometer(double distanceInKilometers, long occupationTimeInSeconds) {
-        if(distanceInKilometers <= 0 || occupationTimeInSeconds <= 0){
+        if (distanceInKilometers <= 0 || occupationTimeInSeconds <= 0) {
             //shouldn't happen
             int[] zeroArray = {0, 0};
             return zeroArray;

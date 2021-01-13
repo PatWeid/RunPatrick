@@ -14,14 +14,17 @@ import java.util.List;
 public interface OccupationMaker {
     /**
      * method that is called when tracking starts
+     *
+     * @throws wrongSequenceException when tracking is already running
      */
     void startTracking() throws wrongSequenceException;
 
     /**
      * method that is called when tracking stops
-     * ATTENTION: this method should only be called after startTracking was called. This won't be checked by this class.
+     *
      * @param locationList list with all locations collected during tracking
      * @return occupation that is created. Start- and endDate will be created automatically
+     * @throws wrongSequenceException when trackings wasnt started before
      */
     Occupation stopTracking(List<Location> locationList) throws wrongSequenceException;
 }

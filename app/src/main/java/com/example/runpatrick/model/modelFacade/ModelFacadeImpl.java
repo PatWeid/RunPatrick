@@ -9,12 +9,13 @@ import com.example.runpatrick.model.database.Repository;
 import com.example.runpatrick.model.datastructure.DistanceCalculator;
 import com.example.runpatrick.model.datastructure.Occupation;
 import com.example.runpatrick.model.occupationMaker.OccupationMaker;
+import com.example.runpatrick.model.timeCalculator.TimeCalculator;
 import com.example.runpatrick.util.PojoConverter;
 
 import java.util.List;
 
 
-public class ModelFacadeImpl implements  ModelFacade{
+public class ModelFacadeImpl implements ModelFacade {
     private OccupationMaker occupationMaker;
     private Repository repository;
     private TimeCalculator timeCalculator;
@@ -67,7 +68,7 @@ public class ModelFacadeImpl implements  ModelFacade{
 
     @Override
     public Long getOccupationTime() {
-       return timeCalculator.getOccupationTime();
+        return timeCalculator.getOccupationTime();
     }
 
     @Override

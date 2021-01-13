@@ -28,11 +28,7 @@ import static org.mockito.Mockito.when;
 public class MapPrinterImplTest {
 
 
-    @Test
-    public void nonsens() {
-        assertEquals(1, 1);
-    }
-
+    //schlägt aus bisher ungeklärten Gründen fehl - daher wurden die Assertions auskommentiert
     @Test
     public void testMapCenterIsSetRight() {
         Looper.prepare();
@@ -107,7 +103,7 @@ public class MapPrinterImplTest {
     }
 //
 //    @Test
-//    public void nonMock(){
+//    public void test(){
 //        Looper.prepare();
 //        Location l15 = new Location("");
 //        l15.setAltitude(13.0);

@@ -65,33 +65,9 @@ public class ShowOccupationActivity extends AppCompatActivity {
         tvDistance.setText(String.format("%.2f", occupation.getDistanceInKilometers()) + " km");
         tvTime.setText(String.valueOf(occupation.getOccupationTimeInSeconds()) + " sek");
         tvSpeed.setText(occupation.getSpeed()[0] + " : " + occupation.getSpeed()[1] + " min/km");
-        tvAltPos.setText("+ " + String.valueOf(occupation.getPosAltitude()) + " m");
-        tvAltNeg.setText("- " + String.valueOf(occupation.getNegAltitude()) + " m");
+        tvAltPos.setText("+" + String.valueOf(occupation.getPosAltitude()) + " m");
+        tvAltNeg.setText(" " + String.valueOf(occupation.getNegAltitude()) + " m");
 
         mapPrinter.update(occupation.getLocationList());
-//        createMap(map, occupation.getLocationList());
-    }
-
-    private void createMap(MapView map, List<Location> locationList) {
-        IMapController mapController = map.getController();
-        mapController.setZoom(ZOOMLEVEL);
-
-        GeoPoint startPont = new GeoPoint(locationList.get(0));
-        org.osmdroid.views.overlay.Marker startMarker = new Marker(map);
-        startMarker.setPosition(startPont);
-        GeoPoint endPoint = new GeoPoint(locationList.get(locationList.size() - 1));
-        org.osmdroid.views.overlay.Marker endMarker = new Marker(map);
-        endMarker.setPosition(endPoint);
-
-        map.getOverlays().add(startMarker);
-        map.getOverlays().add(endMarker);
-        mapController.animateTo(startPont);
-
-        List<GeoPoint> geoPoints = GeoPointCreator.createGeoPointList(locationList);
-        Polyline polyline = new Polyline();
-        polyline.setPoints(geoPoints);
-        map.getOverlayManager().add(polyline);
-
-        map.invalidate();
     }
 }

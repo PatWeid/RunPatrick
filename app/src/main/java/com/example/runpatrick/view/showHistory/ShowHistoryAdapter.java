@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.OccupationHolder>{
+public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.OccupationHolder> {
     private List<OccupationPojo> occupations = new ArrayList<>();
     private OnItemClickListener listener;
 
@@ -46,7 +46,7 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
         Occupation currentOccupation = PojoConverter.convertToOccupation(occupations.get(position));
 
         holder.tvNumber.setText(new SimpleDateFormat("dd:MM:yy").format(currentOccupation.getStartDate()));
-        holder.tvDistance.setText(String.format("%.2f", currentOccupation.getDistanceInKilometers())+"km");
+        holder.tvDistance.setText(String.format("%.2f", currentOccupation.getDistanceInKilometers()) + "km");
     }
 
     @Override
@@ -55,15 +55,13 @@ public class ShowHistoryAdapter extends RecyclerView.Adapter<ShowHistoryAdapter.
     }
 
     public void setOccupations(List<OccupationPojo> occupations) {
-        this.occupations=occupations;
+        this.occupations = occupations;
         //zeichne layout neu
         notifyDataSetChanged();
     }
 
 
-
-
-    class OccupationHolder extends RecyclerView.ViewHolder{
+    class OccupationHolder extends RecyclerView.ViewHolder {
         private final TextView tvNumber;
         private final TextView tvDistance;
 
